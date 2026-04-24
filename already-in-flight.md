@@ -8,14 +8,10 @@ The purpose of this check is to surface in-flight or completed work in the Firef
 
 **Run this before anything else:**
 
-```
-claude mcp list
-```
+Call `mcp__atlassian__atlassianUserInfo` directly. A live, authenticated connection returns Karen's name, email (`kkim@mozilla.com`), and account status. This confirms the server is not just registered but actually responding — `claude mcp list` only checks registration, not auth.
 
-Look for `atlassian` in the output with a connected status.
-
-- **If `atlassian` is connected:** proceed to Input.
-- **If `atlassian` is missing or not connected:** stop and surface this to Karen immediately:
+- **If the call returns account info:** proceed to Input.
+- **If the call fails or beturns an error:** stop and surface this to Karen immediately:
 
 > **Jira is unavailable — the Atlassian MCP is not connected in this session. The workstream alignment check cannot complete without it. Jira is the primary signal for in-flight team work; skipping it defeats the purpose of the check.**
 >
