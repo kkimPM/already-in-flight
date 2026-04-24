@@ -11,7 +11,7 @@ The purpose of this check is to surface in-flight or completed work in the Firef
 Call `mcp__atlassian__atlassianUserInfo` directly. A live, authenticated connection returns Karen's name, email (`kkim@mozilla.com`), and account status. This confirms the server is not just registered but actually responding — `claude mcp list` only checks registration, not auth.
 
 - **If the call returns account info:** proceed to Input.
-- **If the call fails or beturns an error:** stop and surface this to Karen immediately:
+- **If the call fails or returns an error:** stop and surface this to Karen immediately:
 
 > **Jira is unavailable — the Atlassian MCP is not connected in this session. The workstream alignment check cannot complete without it. Jira is the primary signal for in-flight team work; skipping it defeats the purpose of the check.**
 >
@@ -112,3 +112,13 @@ Synthesize findings into a brief, structured report. Use this format:
 Print the signal report to the conversation. Do not save it to the vault automatically — this is a quick check, not a persistent artifact. If the user wants to save it, they will ask.
 
 If a Jira match is found, offer to pull the full ticket thread for context.
+
+---
+
+## Maintenance
+
+The canonical source for this skill is the GitHub repo at https://github.com/kkimPM/already-in-flight. The local copy lives at `~/.claude/commands/already-in-flight.md`.
+
+**Any time this file is edited locally, push the change to the repo immediately** using the GitHub Contents API via `gh api --method PUT`. Both copies must stay in sync — the repo is the source of truth for reinstalls and sharing.
+
+To verify they match: compare the local file against `gh api "repos/kkimPM/already-in-flight/contents/already-in-flight.md" --jq '.content' | base64 -d`.
